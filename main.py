@@ -1,10 +1,10 @@
 # importing packages
 from pulp import *
 import pandas as pd
-slots = [[]]
+slots = []
 
-def createSlot(teacher,student,time):
-	slots[time].append(("Teacher -",teacher,":","Student -",student))
+def createSlot(teacher,student):
+    slots.append((teacher+" : "+student))
 
 
 # formatting csv data for the parent timings into a manipulable form with pandas
@@ -24,20 +24,19 @@ print(problem)
 
 # LOOPING THROUGH EACH TIME SLOT
 for i in range(numoftimeslots):
-	timenum = i
-	print("SLOT",i)
-	# Making sure the slots generate the correct subject choices
+    print("SLOT",i)
+    # Making sure the slots generate the correct subject choices
 
-	# Making sure each time slot has less than or the same as the max number of appointments per time slot
-	maxappointments = LpVariable('appointments', lowBound=0, upBound=5, cat='Integer')
-	maxavailableappointments = numofteachers
-	problem += (maxappointments == maxavailableappointments)
+    # Making sure each time slot has less than or the same as the max number of appointments per time slot
+    maxappointments = LpVariable('appointments', lowBound=0, upBound=5, cat='Integer')
+    maxavailableappointments = numofteachers
+    problem += (maxappointments == maxavailableappointments)
 
-	for j in range(numofteachers):
-		print("Slot",i,"Appointment",j)
-		createSlot('Mr.Will','Will',timenum)
-		print(slots)
-	# Making sure there are no clashes
+    for j in range(numofteachers):
+        print("Slot",i,"Appointment",j)
+        createSlot('Mr.Will','Will')
+        print(slots)
+    # Making sure there are no clashes
 
 
 print(LpStatus[problem.status])
