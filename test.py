@@ -21,17 +21,19 @@ def outputSlots():
 def createSlot(teacher,student):
     slots.append((teacher+" : "+student))
 
-for i in range(TotalSlots):
-    slots.append('Slot :'+str(i))
-    for teacher in teacherlist:
-        verified = False
-        while verified == False:
-            for student in Students.keys():
-                if teacher in Students[student]:
-                    print('Verified slot')
-                    createSlot(teacher,student)
-                    verified = True
+# Loops through each slot with each teacher and matches students to their teachers needed
+def slotSorter(TotalSlots,teacherlist,Students):
+    for i in range(TotalSlots):
+        slots.append('Slot :'+str(i))
+        for teacher in teacherlist:
+            verified = False
+            while verified == False:
+                for student in Students.keys():
+                    if teacher in Students[student]:
+                        createSlot(teacher,student)
+                        verified = True
 
+slotSorter(TotalSlots,teacherlist,Students)
 outputSlots()
 print(Students.values())
 print(Students.keys())
