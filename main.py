@@ -38,7 +38,6 @@ for i in range(numoftimeslots):
         print(slots)
     # Making sure there are no clashes
 
-
 print(LpStatus[problem.status])
 
 '''
