@@ -19,16 +19,6 @@ def outputSlots():
             print(item)
     print('='*100)
 
-# Checks if the slot has already been made
-def checkSlot(teacher,student):
-    if len(slots) == 0:
-        return True
-    else:
-        for appointment in slots:
-            if (teacher+" : "+student) == appointment:
-                return False
-        return True
-
 # Creates slots
 def createSlot(teacher,student):
     slots.append((teacher+" : "+student))
@@ -42,16 +32,8 @@ def slotSorter(TotalSlots,teacherlist,Students):
             while verified == False:
                 for student in Students.keys():
                     if teacher in Students[student]:
-                        createSlot(teacher, student)
+                        createSlot(teacher,student)
                         verified = True
-                        '''
-                        if checkSlot(teacher,student):
-                            createSlot(teacher,student)
-                            verified = True
-                        else:
-                            print("Slot has already been made")
-                            verified = True
-                        '''
     outputSlots()
 
 # Basic appointments - no clashes
